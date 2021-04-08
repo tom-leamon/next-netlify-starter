@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Header from '@components/Header'
 import Footer from '@components/Footer'
 
-export default function Home() {
+export default function Home({ dynamic }) {
   return (
     <div className="container">
       <Head>
@@ -11,13 +11,20 @@ export default function Home() {
       </Head>
 
       <main>
-        <Header title="Welcome to my app!" />
         <p className="description">
-          Get started by editing <code>pages/index.js</code>
+          { dynamic }
         </p>
       </main>
 
       <Footer />
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      dynamic: "test"
+    }, // will be passed to the page component as props
+  }
 }
